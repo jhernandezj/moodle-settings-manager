@@ -20,17 +20,25 @@ func main() {
 	// Create a new settings manager
 	manager := settings.New(config)
 
-	// Example: Get a setting
-	value, err := manager.GetSetting("site_name")
-	if err != nil {
-		log.Fatalf("Error getting setting: %v", err)
-	}
-	fmt.Printf("Site name: %s\n", value)
+	// Try to get all predefined settings
+	settingNames := []string{"site_name", "maintenance_mode", "theme", "lang"}
 
-	// Example: Update a setting
-	err = manager.UpdateSetting("maintenance_mode", "enabled")
+	fmt.Println("Current settings:")
+	for _, name := range settingNames {
+		value, err := manager.GetSetting(name)
+		if err != nil {
+			log.Printf("Error getting %s: %v\n", name, err)
+			continue
+		}
+		fmt.Printf("%s: %s\n", name, value)
+	}
+
+	// Update a setting
+	err := manager.UpdateSetting("maintenance_mode", "enabled")
 	if err != nil {
 		log.Fatalf("Error updating setting: %v", err)
 	}
-	fmt.Println("Successfully updated maintenance mode setting")
+	fmt.Println("\nAfter update:")
+	value, _ := manager.GetSetting("maintenance_mode")
+	fmt.Printf("maintenance_mode: %s\n", value)
 }
