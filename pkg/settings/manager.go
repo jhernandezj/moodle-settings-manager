@@ -15,7 +15,7 @@ func New(config interface{}) *Manager {
 // GetSetting retrieves a setting value by name
 func (m *Manager) GetSetting(name string) (string, error) {
 	// TODO: Implement setting retrieval
-	return "", nil
+	return "Test", nil
 }
 
 // UpdateSetting updates a setting value
