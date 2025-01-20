@@ -12,15 +12,18 @@ type Manager struct {
 
 // New creates a new settings manager instance
 func New(config interface{}) *Manager {
-	return &Manager{
-		config: config,
-		settings: map[string]string{
-			"site_name":        "My Moodle Site",
-			"maintenance_mode": "disabled",
-			"theme":            "boost",
-			"lang":             "en",
-		},
+	m := &Manager{
+		config:   config,
+		settings: make(map[string]string),
 	}
+
+	// Initialize default settings
+	m.settings["site_name"] = "My Moodle Site"
+	m.settings["maintenance_mode"] = "disabled"
+	m.settings["theme"] = "boost"
+	m.settings["lang"] = "en"
+
+	return m
 }
 
 // GetSetting retrieves a setting value by name
