@@ -1,6 +1,8 @@
 package settings
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Manager handles Moodle settings operations
 type Manager struct {
